@@ -1,20 +1,16 @@
-﻿@model IEnumerable<EKomplet.Models.District>
+﻿@model IEnumerable<EKomplet.ServiceLayer.DTOs.DistrictDTO>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Districts</h1>
-<h2>Dette er en oversigt over distrikter</h2>
+<h1>Oversigt over Distrikter</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DistrictName)
+                Distrikter
             </th>
             <th></th>
         </tr>
@@ -26,11 +22,15 @@
                 @Html.DisplayFor(modelItem => item.DistrictName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DistrictName">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DistrictName">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DistrictName">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.DistrictID">Redigér</a> |
+                <a asp-action="Details" asp-route-id="@item.DistrictID">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.DistrictID">Slet</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="Create">Tilføj nyt distrikt</a>
+</p>

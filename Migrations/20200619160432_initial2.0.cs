@@ -2,7 +2,7 @@
 
 namespace EKomplet.Migrations
 {
-    public partial class newMethodSalesman : Migration
+    public partial class initial20 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

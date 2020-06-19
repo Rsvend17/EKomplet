@@ -20,39 +20,41 @@ namespace EKomplet.Migrations
 
             modelBuilder.Entity("EKomplet.Models.Business", b =>
                 {
-                    b.Property<string>("BusinessName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("BusinessID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DistrictName1")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("BusinessName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("BusinessName", "DistrictName");
+                    b.HasKey("BusinessID");
 
-                    b.HasIndex("DistrictName1");
+                    b.HasIndex("DistrictID");
 
                     b.ToTable("Businesses");
                 });
 
             modelBuilder.Entity("EKomplet.Models.District", b =>
                 {
+                    b.Property<int>("DistrictID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SalesmanID")
-                        .HasColumnType("int");
-
-                    b.HasKey("DistrictName");
-
-                    b.HasIndex("SalesmanID");
+                    b.HasKey("DistrictID");
 
                     b.ToTable("Districts");
                 });
@@ -66,8 +68,7 @@ namespace EKomplet.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -87,35 +88,56 @@ namespace EKomplet.Migrations
                     b.ToTable("Salesmen");
                 });
 
-            modelBuilder.Entity("EKomplet.Models.SecondarySalesmen", b =>
+            modelBuilder.Entity("EKomplet.Models.SalesmenInBusiness", b =>
                 {
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("BusinessID")
+                        .HasColumnType("int");
 
                     b.Property<int>("SalesmanID")
                         .HasColumnType("int");
 
-                    b.Property<string>("DistrictName1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DistrictName", "SalesmanID");
-
-                    b.HasIndex("DistrictName1");
+                    b.HasKey("BusinessID", "SalesmanID");
 
                     b.HasIndex("SalesmanID");
 
-                    b.ToTable("SecondarySalesmens");
+                    b.ToTable("SalesmenInBusinesses");
+                });
+
+            modelBuilder.Entity("EKomplet.Models.SalesmenStatus", b =>
+                {
+                    b.Property<int>("DistrictID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesmanID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("DistrictID", "SalesmanID");
+
+                    b.HasIndex("SalesmanID");
+
+                    b.ToTable("SalesmenStatuses");
                 });
 
             modelBuilder.Entity("EKomplet.Models.Business", b =>
                 {
                     b.HasOne("EKomplet.Models.District", "District")
                         .WithMany()
-                        .HasForeignKey("DistrictName1");
+                        .HasForeignKey("DistrictID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("EKomplet.Models.District", b =>
+            modelBuilder.Entity("EKomplet.Models.SalesmenInBusiness", b =>
                 {
+                    b.HasOne("EKomplet.Models.Business", "Business")
+                        .WithMany()
+                        .HasForeignKey("BusinessID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EKomplet.Models.Salesman", "Salesman")
                         .WithMany()
                         .HasForeignKey("SalesmanID")
@@ -123,11 +145,13 @@ namespace EKomplet.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EKomplet.Models.SecondarySalesmen", b =>
+            modelBuilder.Entity("EKomplet.Models.SalesmenStatus", b =>
                 {
                     b.HasOne("EKomplet.Models.District", "District")
                         .WithMany()
-                        .HasForeignKey("DistrictName1");
+                        .HasForeignKey("DistrictID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EKomplet.Models.Salesman", "Salesman")
                         .WithMany()

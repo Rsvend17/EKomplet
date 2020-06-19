@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EKomplet.Models
 {
     public class SalesmenInBusiness
     {
-        public Business Business{ get; set; }
+        [Key]
+        public int BusinessID { get; set; }
+
+        [Key]
+        public int SalesmanID { get; set; }
+
+        public Business Business { get; set; }
+
+        public Salesman Salesman { get; set; }
     }
 }

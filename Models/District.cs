@@ -10,10 +10,10 @@ namespace EKomplet.Models
     public class District
     {
         [Key]
+        public int DistrictID { get; set; }
+        
         public string DistrictName { get; set; }
-        [Required]
-        public int SalesmanID { get; set; }
-        public Salesman Salesman { get; set; }
+
 
     }
 }

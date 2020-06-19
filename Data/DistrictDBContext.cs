@@ -17,7 +17,9 @@ namespace EKomplet.Data
         public DbSet<District> Districts { get; set; }
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Salesman> Salesmen { get; set; }
-        public DbSet<SecondarySalesmen> SecondarySalesmens { get; set; }
+        public DbSet<SalesmenStatus> SalesmenStatuses { get; set; }
+        public DbSet<SalesmenInBusiness> SalesmenInBusinesses { get; set; }
+
 
 
 
@@ -26,8 +28,8 @@ namespace EKomplet.Data
             base.OnModelCreating(builder);
             //relations
 
-            builder.Entity<Business>().HasKey(k => new { k.BusinessName, k.DistrictName });
-            builder.Entity<SecondarySalesmen>().HasKey(s => new { s.DistrictName, s.SalesmanID });
+            builder.Entity<SalesmenStatus>().HasKey(k => new { k.DistrictID, k.SalesmanID });
+            builder.Entity<SalesmenInBusiness>().HasKey(k => new { k.BusinessID, k.SalesmanID });
 
         }
     }

@@ -7,27 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EKomplet.Data;
 using EKomplet.Models;
+using EKomplet.ServiceLayer.Logic;
 
 namespace EKomplet.Controllers
 {
     public class DistrictController : Controller
     {
-        private readonly DistrictDBContext _context;
-
+#pragma warning disable IDE0044 // Add readonly modifier
+        private DistrictDBContext _context;
+        private static DistrictLogic districtLogic;
+#pragma warning restore IDE0044 // Add readonly modifier
         public DistrictController(DistrictDBContext context)
         {
             _context = context;
+            districtLogic = new DistrictLogic(context);
+
         }
 
         // GET: District
         public async Task<IActionResult> Index()
         {
-            var districtDBContext = _context.Districts.Include(d => d.Salesman);
-            return View(await districtDBContext.ToListAsync());
+            return View(await districtLogic.GetDistrictsAsync());
         }
 
         // GET: District/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -35,8 +39,7 @@ namespace EKomplet.Controllers
             }
 
             var district = await _context.Districts
-                .Include(d => d.Salesman)
-                .FirstOrDefaultAsync(m => m.DistrictName == id);
+                .FirstOrDefaultAsync(m => m.DistrictID == id);
             if (district == null)
             {
                 return NotFound();
@@ -48,8 +51,6 @@ namespace EKomplet.Controllers
         // GET: District/Create
         public IActionResult Create()
         {
-            ViewData["SalesmanName"] = new SelectList(_context.Salesmen, "SalesmanID", "FullName" );
-   
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DistrictName,SalesmanID")] District district)
+        public async Task<IActionResult> Create([Bind("DistrictID,DistrictName")] District district)
         {
             if (ModelState.IsValid)
             {
@@ -66,12 +67,11 @@ namespace EKomplet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
         // GET: District/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -83,7 +83,6 @@ namespace EKomplet.Controllers
             {
                 return NotFound();
             }
-            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
@@ -92,9 +91,9 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("DistrictName,SalesmanID")] District district)
+        public async Task<IActionResult> Edit(int id, [Bind("DistrictID,DistrictName")] District district)
         {
-            if (id != district.DistrictName)
+            if (id != district.DistrictID)
             {
                 return NotFound();
             }
@@ -108,7 +107,7 @@ namespace EKomplet.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DistrictExists(district.DistrictName))
+                    if (!DistrictExists(district.DistrictID))
                     {
                         return NotFound();
                     }
@@ -119,12 +118,11 @@ namespace EKomplet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
         // GET: District/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -132,8 +130,7 @@ namespace EKomplet.Controllers
             }
 
             var district = await _context.Districts
-                .Include(d => d.Salesman)
-                .FirstOrDefaultAsync(m => m.DistrictName == id);
+                .FirstOrDefaultAsync(m => m.DistrictID == id);
             if (district == null)
             {
                 return NotFound();
@@ -145,7 +142,7 @@ namespace EKomplet.Controllers
         // POST: District/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var district = await _context.Districts.FindAsync(id);
             _context.Districts.Remove(district);
@@ -153,9 +150,9 @@ namespace EKomplet.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DistrictExists(string id)
+        private bool DistrictExists(int id)
         {
-            return _context.Districts.Any(e => e.DistrictName == id);
+            return _context.Districts.Any(e => e.DistrictID == id);
         }
     }
 }
