@@ -12,7 +12,7 @@ namespace EKomplet.Models
         [Key]
         public string DistrictName { get; set; }
         [Required]
-        public int PrimarySalesman { get; set; }
+        public int SalesmanID { get; set; }
         public Salesman Salesman { get; set; }
 
     }

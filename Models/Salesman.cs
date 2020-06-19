@@ -9,6 +9,7 @@ namespace EKomplet.Models
     public class Salesman
     {
         [Key]
+        public int SalesmanID { get; set; }
         [Range(8,8)]
         public int PhoneNumber { get; set; }
         [StringLength(50)]
@@ -22,6 +23,14 @@ namespace EKomplet.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
         [Required]
         public string LastName { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", FirstName, LastName);
+            }
+        }
 
 
     }

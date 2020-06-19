@@ -2,7 +2,7 @@
 
 namespace EKomplet.Migrations
 {
-    public partial class InitialChanges : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,15 +10,16 @@ namespace EKomplet.Migrations
                 name: "Salesmen",
                 columns: table => new
                 {
-                    PhoneNumber = table.Column<int>(nullable: false)
+                    SalesmanID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(maxLength: 50, nullable: true),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: true),
-                    LastName = table.Column<string>(maxLength: 50, nullable: true)
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Salesmen", x => x.PhoneNumber);
+                    table.PrimaryKey("PK_Salesmen", x => x.SalesmanID);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,18 +27,17 @@ namespace EKomplet.Migrations
                 columns: table => new
                 {
                     DistrictName = table.Column<string>(nullable: false),
-                    PrimarySalesman = table.Column<int>(nullable: false),
-                    SalesmanPhoneNumber = table.Column<int>(nullable: true)
+                    SalesmanID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Districts", x => x.DistrictName);
                     table.ForeignKey(
-                        name: "FK_Districts_Salesmen_SalesmanPhoneNumber",
-                        column: x => x.SalesmanPhoneNumber,
+                        name: "FK_Districts_Salesmen_SalesmanID",
+                        column: x => x.SalesmanID,
                         principalTable: "Salesmen",
-                        principalColumn: "PhoneNumber",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "SalesmanID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,14 +65,13 @@ namespace EKomplet.Migrations
                 name: "SecondarySalesmens",
                 columns: table => new
                 {
-                    PhoneNumber = table.Column<int>(nullable: false),
+                    SalesmanID = table.Column<int>(nullable: false),
                     DistrictName = table.Column<string>(nullable: false),
-                    SalesmanPhoneNumber = table.Column<int>(nullable: true),
                     DistrictName1 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SecondarySalesmens", x => new { x.DistrictName, x.PhoneNumber });
+                    table.PrimaryKey("PK_SecondarySalesmens", x => new { x.DistrictName, x.SalesmanID });
                     table.ForeignKey(
                         name: "FK_SecondarySalesmens_Districts_DistrictName1",
                         column: x => x.DistrictName1,
@@ -80,11 +79,11 @@ namespace EKomplet.Migrations
                         principalColumn: "DistrictName",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SecondarySalesmens_Salesmen_SalesmanPhoneNumber",
-                        column: x => x.SalesmanPhoneNumber,
+                        name: "FK_SecondarySalesmens_Salesmen_SalesmanID",
+                        column: x => x.SalesmanID,
                         principalTable: "Salesmen",
-                        principalColumn: "PhoneNumber",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "SalesmanID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -93,9 +92,9 @@ namespace EKomplet.Migrations
                 column: "DistrictName1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Districts_SalesmanPhoneNumber",
+                name: "IX_Districts_SalesmanID",
                 table: "Districts",
-                column: "SalesmanPhoneNumber");
+                column: "SalesmanID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SecondarySalesmens_DistrictName1",
@@ -103,9 +102,9 @@ namespace EKomplet.Migrations
                 column: "DistrictName1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SecondarySalesmens_SalesmanPhoneNumber",
+                name: "IX_SecondarySalesmens_SalesmanID",
                 table: "SecondarySalesmens",
-                column: "SalesmanPhoneNumber");
+                column: "SalesmanID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

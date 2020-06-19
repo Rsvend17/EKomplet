@@ -27,7 +27,7 @@ namespace EKomplet.Data
             //relations
 
             builder.Entity<Business>().HasKey(k => new { k.BusinessName, k.DistrictName });
-            builder.Entity<SecondarySalesmen>().HasKey(s => new { s.DistrictName, s.PhoneNumber });
+            builder.Entity<SecondarySalesmen>().HasKey(s => new { s.DistrictName, s.SalesmanID });
 
         }
     }

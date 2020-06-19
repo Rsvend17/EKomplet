@@ -22,7 +22,8 @@ namespace EKomplet.Controllers
         // GET: District
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Districts.ToListAsync());
+            var districtDBContext = _context.Districts.Include(d => d.Salesman);
+            return View(await districtDBContext.ToListAsync());
         }
 
         // GET: District/Details/5
@@ -34,6 +35,7 @@ namespace EKomplet.Controllers
             }
 
             var district = await _context.Districts
+                .Include(d => d.Salesman)
                 .FirstOrDefaultAsync(m => m.DistrictName == id);
             if (district == null)
             {
@@ -46,6 +48,8 @@ namespace EKomplet.Controllers
         // GET: District/Create
         public IActionResult Create()
         {
+            ViewData["SalesmanName"] = new SelectList(_context.Salesmen, "SalesmanID", "FullName" );
+   
             return View();
         }
 
@@ -54,7 +58,7 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DistrictName,PrimarySalesman")] District district)
+        public async Task<IActionResult> Create([Bind("DistrictName,SalesmanID")] District district)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +66,7 @@ namespace EKomplet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
@@ -78,6 +83,7 @@ namespace EKomplet.Controllers
             {
                 return NotFound();
             }
+            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
@@ -86,7 +92,7 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("DistrictName,PrimarySalesman")] District district)
+        public async Task<IActionResult> Edit(string id, [Bind("DistrictName,SalesmanID")] District district)
         {
             if (id != district.DistrictName)
             {
@@ -113,6 +119,7 @@ namespace EKomplet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SalesmanID"] = new SelectList(_context.Salesmen, "SalesmanID", "Email", district.SalesmanID);
             return View(district);
         }
 
@@ -125,6 +132,7 @@ namespace EKomplet.Controllers
             }
 
             var district = await _context.Districts
+                .Include(d => d.Salesman)
                 .FirstOrDefaultAsync(m => m.DistrictName == id);
             if (district == null)
             {

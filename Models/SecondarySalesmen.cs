@@ -7,7 +7,7 @@ namespace EKomplet.Models
 {
     public class SecondarySalesmen
     {
-        public int PhoneNumber { get; set; }
+        public int SalesmanID { get; set; }
         public string DistrictName{ get; set; }
         public Salesman Salesman { get; set; }
         public District District { get; set; }

@@ -4,7 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Districts</h1>
+<h2>Dette er en oversigt over distrikter</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,7 +15,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.DistrictName)
-                @Html.DisplayNameFor(model => model.PrimarySalesman)
             </th>
             <th></th>
         </tr>
@@ -24,7 +24,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DistrictName)
-                @Html.DisplayFor(modelItem => item.PrimarySalesman)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DistrictName">Edit</a> |

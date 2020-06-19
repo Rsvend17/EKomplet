@@ -30,8 +30,8 @@ namespace EKomplet.Data
 
             var districts = new District[]
             {
-                new District{DistrictName = "Hellerup"},
-                new District{DistrictName = "Skanderborg"}
+                new District{DistrictName = "Hellerup", SalesmanID = 1},
+                new District{DistrictName = "Skanderborg", SalesmanID = 1}
             };
 
             foreach(District d in districts)
