@@ -1,4 +1,4 @@
-﻿@model EKomplet.Models.District
+﻿@model EKomplet.ServiceLayer.DTOs.DistrictDTO
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,19 +14,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DistrictID" />
             <div class="form-group">
-                <label asp-for="DistrictName" class="control-label"></label>
+                <label asp-for="DistrictName" class="control-label">Navn</label>
                 <input asp-for="DistrictName" class="form-control" />
                 <span asp-validation-for="DistrictName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tilbage </a>
 </div>
 
 @section Scripts {

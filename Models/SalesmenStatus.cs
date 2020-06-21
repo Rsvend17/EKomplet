@@ -21,5 +21,14 @@ namespace EKomplet.Models
 
         public Salesman Salesman { get; set; }
         public District District { get; set; }
+
+        public SalesmenStatus() { }
+
+        public SalesmenStatus(int salesmanID, int districtID, Status salesmanStatus)
+        {
+            this.SalesmanID = salesmanID;
+            this.DistrictID = districtID;
+            this.Status = salesmanStatus;
+        }
     }
 }

@@ -14,6 +14,18 @@ namespace EKomplet.Models
         
         public string DistrictName { get; set; }
 
+        public District()
+        {
 
+        }
+        public District(string districtname)
+        {
+            this.DistrictName = districtname;
+        }
+        public District(string districtname, int districtID)
+        {
+            this.DistrictName = districtname;
+            this.DistrictID = districtID;
+        }
     }
 }

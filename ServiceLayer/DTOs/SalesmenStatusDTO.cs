@@ -13,6 +13,7 @@ namespace EKomplet.ServiceLayer.DTOs
 
         public Status Status { get; set; }
 
+        public SalesmenStatusDTO() { }
         public SalesmenStatusDTO(SalesmenStatus status)
         {
             this.SalesmanID = status.SalesmanID;

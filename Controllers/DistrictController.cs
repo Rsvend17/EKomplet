@@ -8,19 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using EKomplet.Data;
 using EKomplet.Models;
 using EKomplet.ServiceLayer.Logic;
+using EKomplet.ServiceLayer.DTOs;
+using EKomplet.ServiceLayer.ViewModel;
 
 namespace EKomplet.Controllers
 {
     public class DistrictController : Controller
     {
-#pragma warning disable IDE0044 // Add readonly modifier
-        private DistrictDBContext _context;
-        private static DistrictLogic districtLogic;
-#pragma warning restore IDE0044 // Add readonly modifier
+        readonly private DistrictDBContext _context;
+        readonly private DistrictLogic districtLogic;
+        readonly private SalesmenStatusLogic salesmenStatusLogic;
+        readonly private SalesmanLogic salesmanLogic;
+        readonly private BusinessLogic businessLogic;
+
         public DistrictController(DistrictDBContext context)
         {
             _context = context;
             districtLogic = new DistrictLogic(context);
+            salesmenStatusLogic = new SalesmenStatusLogic(context);
+            salesmanLogic = new SalesmanLogic(context);
+            businessLogic = new BusinessLogic(context);
 
         }
 
@@ -32,25 +39,19 @@ namespace EKomplet.Controllers
 
         // GET: District/Details/5
         public async Task<IActionResult> Details(int? id)
+
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var salesmenInDistrictID = await salesmenStatusLogic.GetSalesmenStatusesAsync(id);
 
-            var district = await _context.Districts
-                .FirstOrDefaultAsync(m => m.DistrictID == id);
-            if (district == null)
-            {
-                return NotFound();
-            }
 
-            return View(district);
+            DistrictDetailsModelView modelView = new DistrictDetailsModelView(await districtLogic.GetDistrictAsync(id), await salesmanLogic.GetSalesmenFromSalesmenInBusinessTableAsync(salesmenInDistrictID), await businessLogic.GetBusinessesInDistrictAsync(id));
+            return View(modelView);
         }
 
         // GET: District/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+            ViewData["SalesmanName"] = new SelectList(await salesmanLogic.GetSalesmenAsync(), "SalesmanID", "FullName", "SalesmanID");
             return View();
         }
 
@@ -59,12 +60,12 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DistrictID,DistrictName")] District district)
+        public async Task<IActionResult> Create([Bind("DistrictID,DistrictName")] DistrictDTO district, [Bind("DistrictID, SalesmanID")] SalesmenStatusDTO salesmenStatus)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(district);
-                await _context.SaveChangesAsync();
+                await districtLogic.CreateDistrictAsync(district);
+                await salesmenStatusLogic.CreateSalesmanStatusPrimaryAsync(salesmenStatus, district.DistrictName);
                 return RedirectToAction(nameof(Index));
             }
             return View(district);
@@ -73,17 +74,7 @@ namespace EKomplet.Controllers
         // GET: District/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var district = await _context.Districts.FindAsync(id);
-            if (district == null)
-            {
-                return NotFound();
-            }
-            return View(district);
+            return View(await districtLogic.GetDistrictAsync(id));
         }
 
         // POST: District/Edit/5
@@ -91,7 +82,7 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DistrictID,DistrictName")] District district)
+        public async Task<IActionResult> Edit(int id, [Bind("DistrictID,DistrictName")] DistrictDTO district)
         {
             if (id != district.DistrictID)
             {
@@ -100,22 +91,7 @@ namespace EKomplet.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(district);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DistrictExists(district.DistrictID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await districtLogic.EditDistrictAsync(district);
                 return RedirectToAction(nameof(Index));
             }
             return View(district);
@@ -124,19 +100,8 @@ namespace EKomplet.Controllers
         // GET: District/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var district = await _context.Districts
-                .FirstOrDefaultAsync(m => m.DistrictID == id);
-            if (district == null)
-            {
-                return NotFound();
-            }
-
-            return View(district);
+            return View(await districtLogic.GetDistrictAsync(id));
         }
 
         // POST: District/Delete/5
@@ -144,15 +109,70 @@ namespace EKomplet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var district = await _context.Districts.FindAsync(id);
-            _context.Districts.Remove(district);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (await districtLogic.DeleteDistrictAsync(id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else { throw new Exception("Something went wrong when deleting the district"); }
         }
 
-        private bool DistrictExists(int id)
+   
+        public async Task<IActionResult> AddSalesmanToDistrict(int? id)
         {
-            return _context.Districts.Any(e => e.DistrictID == id);
+            var _SalesmenNotInDistrict = await salesmenStatusLogic.GetSalesmenStatusesNotInDistrictAsync(id);
+
+            ViewData["SalesmanName"] = new SelectList(await salesmanLogic.GetSalesmenAsync(_SalesmenNotInDistrict), "SalesmanID", "FullName", "SalesmanID");
+
+            var StatusState = new SelectList(Enum.GetValues(typeof(Status)).Cast<Status>().Select(v => new SelectListItem
+            { Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList(), "Value", "Text", "Value");
+
+            ViewData["Statuses"] = StatusState;
+
+            return View(new AddSalesmanToDistrictViewModel { district = await districtLogic.GetDistrictAsync(id) });
+
+        }
+
+        public async Task<IActionResult> AddSalesmanToDistrictConfirmed(int ID, [Bind("SalesmanID, Status")] SalesmenStatusDTO salesmenStatus)
+        {
+
+            if (salesmenStatus.Status == Status.Primary)
+            {
+                await salesmenStatusLogic.CreateSalesmanStatusPrimaryAsync(salesmenStatus, ID);
+            }
+            else if (salesmenStatus.Status == Status.Secondary)
+            {
+                await salesmenStatusLogic.CreateSalesmanStatusSecondaryAsync(salesmenStatus, ID);
+            }
+            else { throw Exception("Something went terrible wrong in AddSalesmenToDistrictConfirmed"); }
+
+                return RedirectToAction("Details" , new {id = ID });
+        }
+
+        public async Task<IActionResult> DeleteSalesmanDistrict(int id, int myVar)
+        {
+            List<DistrictDTO> districts = new List<DistrictDTO>();
+
+            districts.Add(await districtLogic.GetDistrictAsync(id));
+            ViewData["DistrictID"] = new SelectList(districts, "DistrictID", "DistrictID", "DistrictID");
+            return View(await salesmanLogic.GetSalesmanFromIDAsync(myVar));
+        }
+
+        [HttpPost, ActionName("DeleteSalesmanDistrict")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSalesmanDistrictConfirmed(int id)
+        {
+            if (await districtLogic.DeleteDistrictAsync(id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else { throw new Exception("Something went wrong when deleting the district"); }
+        }
+
+        private Exception Exception(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

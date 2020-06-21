@@ -14,34 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BusinessID" />
             <div class="form-group">
-                <label asp-for="BusinessName" class="control-label"></label>
+                <label asp-for="BusinessName" class="control-label"> Navn</label>
                 <input asp-for="BusinessName" class="form-control" />
                 <span asp-validation-for="BusinessName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DistrictID" class="control-label"></label>
+                <label asp-for="DistrictID" class="control-label"> Distrikt</label>
                 <select asp-for="DistrictID" class="form-control" asp-items="ViewBag.DistrictID"></select>
                 <span asp-validation-for="DistrictID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Adress" class="control-label"></label>
+                <label asp-for="Adress" class="control-label">Adresse</label>
                 <input asp-for="Adress" class="form-control" />
                 <span asp-validation-for="Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ZipCode" class="control-label"></label>
+                <label asp-for="ZipCode" class="control-label">Postnummer</label>
                 <input asp-for="ZipCode" class="form-control" />
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tilbage</a>
 </div>
 
 @section Scripts {

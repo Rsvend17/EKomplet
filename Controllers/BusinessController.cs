@@ -48,7 +48,7 @@ namespace EKomplet.Controllers
         // GET: Business/Create
         public IActionResult Create()
         {
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictID");
+            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", "DistrictID");
             return View();
         }
 

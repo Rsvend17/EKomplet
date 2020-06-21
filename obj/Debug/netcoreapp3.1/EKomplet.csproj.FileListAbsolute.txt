@@ -183,3 +183,5 @@ C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\Salesm
 C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\Salesman\Details.cshtml.g.cs
 C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\Salesman\Edit.cshtml.g.cs
 C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\Salesman\Index.cshtml.g.cs
+C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\District\AddSalesmanToDistrict.cshtml.g.cs
+C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\District\DeleteSalesmanDistrict.cshtml.g.cs

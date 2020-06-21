@@ -11,7 +11,6 @@ namespace EKomplet.Models
     {
         [Key]
         public int SalesmanID { get; set; }
-        [Range(8,8)]
         public int PhoneNumber { get; set; }
         [EmailAddress]
         [Required]

@@ -1,0 +1,10 @@
+﻿@model EKomplet.ServiceLayer.DTOs.SalesmanDTO
+@{
+    ViewData["Title"] = "DeleteSalesmanDistrict";
+}
+
+<h1>@Model.FullName</h1>
+
+
+<select asp-for="SalesmanID" class="form-control" asp-items="ViewBag.DistrictID"></select>
+

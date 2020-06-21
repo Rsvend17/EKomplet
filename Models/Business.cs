@@ -13,7 +13,6 @@ namespace EKomplet.Models
         public string BusinessName { get; set; }
         public int DistrictID { get; set; }
         public string Adress { get; set; }
-        [Range(4,4)]
         public int ZipCode { get; set; }
 
         public District District { get; set; }

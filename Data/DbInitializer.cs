@@ -21,13 +21,13 @@ namespace EKomplet.Data
 
             var districts = new District[]
             {
-                new District{DistrictName = "Nordjylland"},
-                new District{DistrictName = "Midtjylland"},
-                new District{DistrictName = "Sønderjylland"},
-                new District{DistrictName = "Østjylland"},
-                new District{DistrictName = "Fyn"},
-                new District{DistrictName = "Sjælland"},
-                new District{DistrictName = "København"}
+                new District( "Nordjylland"),
+                new District( "Midtjylland"),
+                new District( "Sønderjylland"),
+                new District( "Østjylland"),
+                new District("Fyn"),
+                new District( "Sjælland"),
+                new District( "København")
             };
 
             foreach (District d in districts)
