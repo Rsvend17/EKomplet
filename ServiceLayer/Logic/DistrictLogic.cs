@@ -105,9 +105,5 @@ namespace EKomplet.ServiceLayer.Logic
             return new District(districtDTO.DistrictName, districtDTO.DistrictID);
         }
 
-        private bool DistrictExists(int id)
-        {
-            return Context.Districts.Any(e => e.DistrictID == id);
-        }
     }
 }

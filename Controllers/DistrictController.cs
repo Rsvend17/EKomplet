@@ -152,20 +152,21 @@ namespace EKomplet.Controllers
 
         public async Task<IActionResult> DeleteSalesmanDistrict(int id, int myVar)
         {
-            List<DistrictDTO> districts = new List<DistrictDTO>();
 
-            districts.Add(await districtLogic.GetDistrictAsync(id));
-            ViewData["DistrictID"] = new SelectList(districts, "DistrictID", "DistrictID", "DistrictID");
-            return View(await salesmanLogic.GetSalesmanFromIDAsync(myVar));
+
+            DeleteSalesmanFromDistrictModelView deleteSalesmanDetails = new DeleteSalesmanFromDistrictModelView(await salesmanLogic.GetSalesmanFromIDAsync(myVar),
+                                                                                                                await districtLogic.GetDistrictAsync(id));
+       
+            return View(deleteSalesmanDetails);
         }
 
-        [HttpPost, ActionName("DeleteSalesmanDistrict")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteSalesmanDistrictConfirmed(int id)
+        public async Task<IActionResult> DeleteSalesmanDistrictConfirmed(int id, int myVar)
         {
-            if (await districtLogic.DeleteDistrictAsync(id))
+            if (await salesmenStatusLogic.DeleteSalesmanFromDistrictAsync(myVar, id))
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = myVar });
             }
             else { throw new Exception("Something went wrong when deleting the district"); }
         }

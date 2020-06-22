@@ -1,10 +1,14 @@
-﻿@model EKomplet.ServiceLayer.DTOs.SalesmanDTO
+﻿@model EKomplet.ServiceLayer.ViewModel.DeleteSalesmanFromDistrictModelView
 @{
     ViewData["Title"] = "DeleteSalesmanDistrict";
 }
 
-<h1>@Model.FullName</h1>
+
+    <h3>Vil du gerne slette @Html.DisplayFor(m => m.salesmanDTO.FullName) fra distriktet?</h3>
 
 
-<select asp-for="SalesmanID" class="form-control" asp-items="ViewBag.DistrictID"></select>
-
+<form asp-action="DeleteSalesmanDistrictConfirmed" asp-route-id="@Model.salesmanDTO.SalesmanID" asp-route-myVar="@Model.district.DistrictID">
+    <input type="hidden" asp-for="@Model.salesmanDTO.SalesmanID" />
+    <input type="submit" value="Slet sælger fra distrikt" class="btn btn-danger" /> |
+    <a asp-action="Details" asp-route-id=@Model.district.DistrictID>Tilbage</a>
+</form>
