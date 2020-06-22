@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\Ronnie\source\repos\EKomplet\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\_ViewImports.cshtml"
 using EKomplet;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Ronnie\source\repos\EKomplet\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\_ViewImports.cshtml"
 using EKomplet.Models;
 
 #line default
@@ -61,7 +61,7 @@ using EKomplet.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 2 "C:\Users\Ronnie\source\repos\EKomplet\Views\District\DeleteSalesmanDistrict.cshtml"
+#line 2 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\District\DeleteSalesmanDistrict.cshtml"
   
     ViewData["Title"] = "DeleteSalesmanDistrict";
 

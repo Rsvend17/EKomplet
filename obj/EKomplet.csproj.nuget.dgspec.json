@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\EKomplet.csproj": {}
+    "C:\\Users\\Ronni\\Documents\\GitHub\\EKomplet\\EKomplet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\EKomplet.csproj": {
+    "C:\\Users\\Ronni\\Documents\\GitHub\\EKomplet\\EKomplet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\EKomplet.csproj",
+        "projectUniqueName": "C:\\Users\\Ronni\\Documents\\GitHub\\EKomplet\\EKomplet.csproj",
         "projectName": "EKomplet",
-        "projectPath": "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\EKomplet.csproj",
-        "packagesPath": "C:\\Users\\Ronnie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\obj\\",
+        "projectPath": "C:\\Users\\Ronni\\Documents\\GitHub\\EKomplet\\EKomplet.csproj",
+        "packagesPath": "C:\\Users\\Ronni\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ronni\\Documents\\GitHub\\EKomplet\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ronnie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ronni\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

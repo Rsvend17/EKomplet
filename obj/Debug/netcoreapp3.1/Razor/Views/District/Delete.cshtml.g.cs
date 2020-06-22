@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\Ronnie\source\repos\EKomplet\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\_ViewImports.cshtml"
 using EKomplet;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Ronnie\source\repos\EKomplet\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\_ViewImports.cshtml"
 using EKomplet.Models;
 
 #line default
@@ -62,7 +62,7 @@ using EKomplet.Models;
         {
             WriteLiteral("\r\n");
 #nullable restore
-#line 3 "C:\Users\Ronnie\source\repos\EKomplet\Views\District\Delete.cshtml"
+#line 3 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\District\Delete.cshtml"
   
     ViewData["Title"] = "Delete";
 
@@ -78,9 +78,9 @@ using EKomplet.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n    \r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d16bc642180f56db67c6001bcbd058641c751495141", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b7821e76e5e873e13dda1e2e72b28d85d5d7265f5395", async() => {
                 WriteLiteral("\r\n        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4d16bc642180f56db67c6001bcbd058641c751495407", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "b7821e76e5e873e13dda1e2e72b28d85d5d7265f5661", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -88,7 +88,7 @@ using EKomplet.Models;
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.InputTypeName = (string)__tagHelperAttribute_0.Value;
                 __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_0);
 #nullable restore
-#line 21 "C:\Users\Ronnie\source\repos\EKomplet\Views\District\Delete.cshtml"
+#line 23 "C:\Users\Ronni\Documents\GitHub\EKomplet\Views\District\Delete.cshtml"
 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvider.CreateModelExpression(ViewData, __model => __model.DistrictID);
 
 #line default

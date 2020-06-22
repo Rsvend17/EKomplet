@@ -124,7 +124,7 @@ namespace EKomplet.Controllers
             ViewData["SalesmanName"] = new SelectList(await salesmanLogic.GetSalesmenAsync(_SalesmenNotInDistrict), "SalesmanID", "FullName", "SalesmanID");
 
             var StatusState = new SelectList(Enum.GetValues(typeof(Status)).Cast<Status>().Select(v => new SelectListItem
-            { Text = v.ToString(),
+            { Text = TranslateStatusEnumDanish(v.ToString()),
                 Value = ((int)v).ToString()
             }).ToList(), "Value", "Text", "Value");
 
@@ -174,6 +174,15 @@ namespace EKomplet.Controllers
         private Exception Exception(string v)
         {
             throw new NotImplementedException();
+        }
+
+        private string TranslateStatusEnumDanish(String status)
+        {
+            if (status == "Primary")
+            {
+                return "Primær";
+            }
+            else return "Sekundær";
         }
     }
 }
