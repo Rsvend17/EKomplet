@@ -38,7 +38,7 @@ namespace EKomplet.ServiceLayer.Logic
             return salesmenStatuses;
         }
 
-        public async Task<List<SalesmenStatusDTO>> GetSalesmenStatusesNotInDistrictAsync(int? districtID)
+        public async Task<List<SalesmenStatusDTO>> GetSalesmenStatusesInDistrictAsync(int? districtID)
         {
             if (districtID == null)
             {
@@ -47,13 +47,22 @@ namespace EKomplet.ServiceLayer.Logic
 
             List<SalesmenStatusDTO> _salesmenStatuses = new List<SalesmenStatusDTO>();
 
-            foreach (SalesmenStatus s in await Context.SalesmenStatuses.Where(s => s.DistrictID != districtID).ToListAsync())
+            foreach (SalesmenStatus s in await Context.SalesmenStatuses.Where(s => s.DistrictID == districtID).ToListAsync())
             {
                 _salesmenStatuses.Add(new SalesmenStatusDTO(s));
             }
 
-
             return _salesmenStatuses;
+        }
+
+        public async Task<List<SalesmanDTO>> GetSalesmenInDistrictAsync(List<SalesmanDTO> salesmen, int? districtID)
+        {
+
+            List<SalesmenStatusDTO> _salesmenStatuses = await GetSalesmenStatusesInDistrictAsync(districtID);
+
+            salesmen.RemoveAll(x => _salesmenStatuses.Exists(y => y.SalesmanID == x.SalesmanID));
+
+            return salesmen;
         }
 
         public async Task<bool> CreateSalesmanStatusPrimaryAsync(SalesmenStatusDTO salesmenStatus, string districtName)

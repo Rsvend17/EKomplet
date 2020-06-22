@@ -119,9 +119,9 @@ namespace EKomplet.Controllers
    
         public async Task<IActionResult> AddSalesmanToDistrict(int? id)
         {
-            var _SalesmenNotInDistrict = await salesmenStatusLogic.GetSalesmenStatusesNotInDistrictAsync(id);
+            var _SalesmenNotInDistrict = await salesmenStatusLogic.GetSalesmenInDistrictAsync(await salesmanLogic.GetSalesmenAsync(), id);
 
-            ViewData["SalesmanName"] = new SelectList(await salesmanLogic.GetSalesmenAsync(_SalesmenNotInDistrict), "SalesmanID", "FullName", "SalesmanID");
+            ViewData["SalesmanName"] = new SelectList(_SalesmenNotInDistrict, "SalesmanID", "FullName", "SalesmanID");
 
             var StatusState = new SelectList(Enum.GetValues(typeof(Status)).Cast<Status>().Select(v => new SelectListItem
             { Text = TranslateStatusEnumDanish(v.ToString()),

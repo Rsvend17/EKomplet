@@ -54,7 +54,7 @@ namespace EKomplet.ServiceLayer.Logic
 
             foreach (SalesmenStatusDTO s in salesmenIDs)
             {
-                salesmen.Add(new SalesmanDTO(await Context.Salesmen.Where(m => m.SalesmanID == s.SalesmanID).FirstOrDefaultAsync()));
+                salesmen.Add(new SalesmanDTO(await Context.Salesmen.Where(m => m.SalesmanID != s.SalesmanID).FirstOrDefaultAsync()));
             }
 
             return salesmen;
