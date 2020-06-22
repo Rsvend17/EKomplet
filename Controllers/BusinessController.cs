@@ -65,7 +65,7 @@ namespace EKomplet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictID", business.DistrictID);
+            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
@@ -82,7 +82,7 @@ namespace EKomplet.Controllers
             {
                 return NotFound();
             }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictID", business.DistrictID);
+            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
@@ -118,7 +118,7 @@ namespace EKomplet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictID", business.DistrictID);
+            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
