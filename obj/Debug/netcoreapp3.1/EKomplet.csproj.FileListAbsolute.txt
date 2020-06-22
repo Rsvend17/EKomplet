@@ -372,3 +372,4 @@ C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\staticwebassets
 C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\EKomplet.dll
 C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\EKomplet.pdb
 C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\EKomplet.genruntimeconfig.cache
+C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\District\DeleteSalesmanFailed.cshtml.g.cs

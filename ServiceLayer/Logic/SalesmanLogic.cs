@@ -34,6 +34,15 @@ namespace EKomplet.ServiceLayer.Logic
             return salesmen;
         }
 
+        public async Task<List<SalesmanDTO>> GetSalesmenNotInDistrictAsync(List<SalesmenStatusDTO> _salesmenStatuses, int? districtID)
+        {
+
+            List<SalesmanDTO> salesmen = await GetSalesmenAsync();
+            salesmen.RemoveAll(x => _salesmenStatuses.Exists(y => y.SalesmanID == x.SalesmanID));
+
+            return salesmen;
+        }
+
         public async Task<List<SalesmanDTO>> GetSalesmenAsync()
         {
             List<SalesmanDTO> salesmen = new List<SalesmanDTO>();

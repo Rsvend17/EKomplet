@@ -119,8 +119,7 @@ namespace EKomplet.Controllers
    
         public async Task<IActionResult> AddSalesmanToDistrict(int? id)
         {
-            var _SalesmenNotInDistrict = await salesmenStatusLogic.GetSalesmenInDistrictAsync(await salesmanLogic.GetSalesmenAsync(), id);
-
+            var _SalesmenNotInDistrict = await salesmanLogic.GetSalesmenNotInDistrictAsync(await salesmenStatusLogic.GetSalesmenStatusesInDistrictAsync(id), id);
             ViewData["SalesmanName"] = new SelectList(_SalesmenNotInDistrict, "SalesmanID", "FullName", "SalesmanID");
 
             var StatusState = new SelectList(Enum.GetValues(typeof(Status)).Cast<Status>().Select(v => new SelectListItem
@@ -164,11 +163,21 @@ namespace EKomplet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteSalesmanDistrictConfirmed(int id, int myVar)
         {
+
             if (await salesmenStatusLogic.DeleteSalesmanFromDistrictAsync(myVar, id))
             {
                 return RedirectToAction("Details", new { id = myVar });
             }
-            else { throw new Exception("Something went wrong when deleting the district"); }
+            else {
+                return RedirectToAction("DeleteSalesmanFailed", new { id = myVar});
+                 }
+        }
+
+        public async Task<IActionResult> DeleteSalesmanFailed(int id)
+        {
+            DistrictDTO districtDTO = new DistrictDTO(id);
+
+            return View(districtDTO);
         }
 
         private Exception Exception(string v)

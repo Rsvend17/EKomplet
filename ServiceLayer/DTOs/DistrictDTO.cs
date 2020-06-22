@@ -14,6 +14,12 @@ namespace EKomplet.ServiceLayer.DTOs
 
         public DistrictDTO() { }
 
+        public DistrictDTO(int districtID)
+        {
+            this.DistrictID = districtID;
+        }
+
+
         public DistrictDTO (District district)
         {
             this.DistrictID = district.DistrictID;

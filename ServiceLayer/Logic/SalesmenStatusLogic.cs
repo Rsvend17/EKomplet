@@ -55,15 +55,6 @@ namespace EKomplet.ServiceLayer.Logic
             return _salesmenStatuses;
         }
 
-        public async Task<List<SalesmanDTO>> GetSalesmenInDistrictAsync(List<SalesmanDTO> salesmen, int? districtID)
-        {
-
-            List<SalesmenStatusDTO> _salesmenStatuses = await GetSalesmenStatusesInDistrictAsync(districtID);
-
-            salesmen.RemoveAll(x => _salesmenStatuses.Exists(y => y.SalesmanID == x.SalesmanID));
-
-            return salesmen;
-        }
 
         public async Task<bool> CreateSalesmanStatusPrimaryAsync(SalesmenStatusDTO salesmenStatus, string districtName)
         {
@@ -112,10 +103,19 @@ namespace EKomplet.ServiceLayer.Logic
 
         public async Task<bool> DeleteSalesmanFromDistrictAsync(int districtID, int salesmanID)
         {
-            var SalesmanStatus = await Context.SalesmenStatuses.Where(m => m.DistrictID == districtID).Where(m => m.SalesmanID == salesmanID).FirstAsync();
-            Context.SalesmenStatuses.Remove(SalesmanStatus);
-            await Context.SaveChangesAsync();
-            return true;
+            var salesmanCheck = await Context.SalesmenStatuses.Where(m => m.Status == Status.Primary).Where(m => m.DistrictID == districtID).ToListAsync();
+
+            if(salesmanCheck.Count > 1)
+            {
+                var SalesmanStatus = await Context.SalesmenStatuses.Where(m => m.DistrictID == districtID).Where(m => m.SalesmanID == salesmanID).FirstAsync();
+                Context.SalesmenStatuses.Remove(SalesmanStatus);
+                await Context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
         }
 
