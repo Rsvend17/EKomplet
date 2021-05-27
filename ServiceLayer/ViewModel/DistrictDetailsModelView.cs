@@ -15,10 +15,9 @@ namespace EKomplet.ServiceLayer.ViewModel
 
         public DistrictDetailsModelView(DistrictDTO district, List<SalesmanDTO> salesmen, List<BusinessDTO> businesses)
         {
-            this.District = district;
-            this.Salesmen = salesmen;
-            this.Businesses = businesses;
+            District = district;
+            Salesmen = salesmen;
+            Businesses = businesses;
         }
-
     }
 }

@@ -8,7 +8,6 @@ namespace EKomplet.ServiceLayer.DTOs
 {
     public class BusinessDTO
     {
-
         public int BusinessID { get; set; }
         public string BusinessName { get; set; }
         public int DistrictID { get; set; }
@@ -16,16 +15,13 @@ namespace EKomplet.ServiceLayer.DTOs
         public int ZipCode { get; set; }
 
 
-        public BusinessDTO (Business business)
+        public BusinessDTO(Business business)
         {
-            this.BusinessID = business.BusinessID;
-            this.BusinessName = business.BusinessName;
-            this.DistrictID = business.BusinessID;
-            this.Address = business.Adress;
-            this.ZipCode = business.ZipCode;
+            BusinessID = business.BusinessID;
+            BusinessName = business.BusinessName;
+            DistrictID = business.BusinessID;
+            Address = business.Adress;
+            ZipCode = business.ZipCode;
         }
-
-
-
     }
 }

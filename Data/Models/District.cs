@@ -9,23 +9,23 @@ namespace EKomplet.Models
 {
     public class District
     {
-        [Key]
-        public int DistrictID { get; set; }
-        
+        [Key] public int DistrictID { get; set; }
+
         public string DistrictName { get; set; }
 
         public District()
         {
-
         }
+
         public District(string districtname)
         {
-            this.DistrictName = districtname;
+            DistrictName = districtname;
         }
+
         public District(string districtname, int districtID)
         {
-            this.DistrictName = districtname;
-            this.DistrictID = districtID;
+            DistrictName = districtname;
+            DistrictID = districtID;
         }
     }
 }

@@ -4,35 +4,35 @@
     ViewData["Title"] = "Edit";
 }
 
-    <h4>Rédiger @Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)</h4>
-<hr />
+<h4>Rédiger @Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)</h4>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SalesmanID" />
+            <input type="hidden" asp-for="SalesmanID"/>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label">Telefonnummer</label>
-                <input asp-for="PhoneNumber" class="form-control" />
+                <input asp-for="PhoneNumber" class="form-control"/>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">E-mail</label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label">Fornavn</label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label">Efternavn</label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control"/>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -43,5 +43,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

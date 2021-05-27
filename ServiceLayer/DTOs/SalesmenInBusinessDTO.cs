@@ -8,14 +8,13 @@ namespace EKomplet.ServiceLayer.DTOs
 {
     public class SalesmenInBusinessDTO
     {
-
         public int BusinessID { get; set; }
         public int SalesmanID { get; set; }
 
-        public SalesmenInBusinessDTO (SalesmenInBusiness s)
+        public SalesmenInBusinessDTO(SalesmenInBusiness s)
         {
-            this.BusinessID = s.BusinessID;
-            this.SalesmanID = s.SalesmanID;
+            BusinessID = s.BusinessID;
+            SalesmanID = s.SalesmanID;
         }
     }
 }

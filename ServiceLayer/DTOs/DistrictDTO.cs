@@ -8,22 +8,23 @@ namespace EKomplet.ServiceLayer.DTOs
 {
     public class DistrictDTO
     {
-
         public int DistrictID { get; set; }
         public string DistrictName { get; set; }
 
-        public DistrictDTO() { }
+        public DistrictDTO()
+        {
+        }
 
         public DistrictDTO(int districtID)
         {
-            this.DistrictID = districtID;
+            DistrictID = districtID;
         }
 
 
-        public DistrictDTO (District district)
+        public DistrictDTO(District district)
         {
-            this.DistrictID = district.DistrictID;
-            this.DistrictName = district.DistrictName;
+            DistrictID = district.DistrictID;
+            DistrictName = district.DistrictName;
         }
     }
 }

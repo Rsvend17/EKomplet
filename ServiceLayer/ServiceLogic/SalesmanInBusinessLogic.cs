@@ -15,26 +15,19 @@ namespace EKomplet.ServiceLayer.Logic
 
         public SalesmanInBusinessLogic(DistrictDBContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
         public async Task<List<SalesmenInBusinessDTO>> GetSalesmenInDistrictID(int? businessID)
         {
-            if(businessID == null)
-            {
-                return NotFound();
-            }
+            if (businessID == null) return NotFound();
 
-            List<SalesmenInBusinessDTO> _SalesmenInDistrict = new List<SalesmenInBusinessDTO>();
+            var _SalesmenInDistrict = new List<SalesmenInBusinessDTO>();
 
-            foreach (SalesmenInBusiness s in await Context.SalesmenInBusinesses.Where(s => s.BusinessID == businessID).ToListAsync())
-            {
+            foreach (var s in await Context.SalesmenInBusinesses.Where(s => s.BusinessID == businessID).ToListAsync())
                 _SalesmenInDistrict.Add(new SalesmenInBusinessDTO(s));
-            }
 
             return _SalesmenInDistrict;
-
-
         }
 
         private List<SalesmenInBusinessDTO> NotFound()

@@ -29,18 +29,12 @@ namespace EKomplet.Controllers
         // GET: Business/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var business = await _context.Businesses
                 .Include(b => b.District)
                 .FirstOrDefaultAsync(m => m.BusinessID == id);
-            if (business == null)
-            {
-                return NotFound();
-            }
+            if (business == null) return NotFound();
 
             return View(business);
         }
@@ -57,7 +51,8 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BusinessID,BusinessName,DistrictID,Adress,ZipCode")] Business business)
+        public async Task<IActionResult> Create([Bind("BusinessID,BusinessName,DistrictID,Adress,ZipCode")]
+            Business business)
         {
             if (ModelState.IsValid)
             {
@@ -65,24 +60,21 @@ namespace EKomplet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
+
+            ViewData["DistrictID"] =
+                new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
         // GET: Business/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var business = await _context.Businesses.FindAsync(id);
-            if (business == null)
-            {
-                return NotFound();
-            }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
+            if (business == null) return NotFound();
+            ViewData["DistrictID"] =
+                new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
@@ -91,12 +83,10 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BusinessID,BusinessName,DistrictID,Adress,ZipCode")] Business business)
+        public async Task<IActionResult> Edit(int id, [Bind("BusinessID,BusinessName,DistrictID,Adress,ZipCode")]
+            Business business)
         {
-            if (id != business.BusinessID)
-            {
-                return NotFound();
-            }
+            if (id != business.BusinessID) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -108,41 +98,35 @@ namespace EKomplet.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!BusinessExists(business.BusinessID))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictID"] = new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
+
+            ViewData["DistrictID"] =
+                new SelectList(_context.Districts, "DistrictID", "DistrictName", business.DistrictID);
             return View(business);
         }
 
         // GET: Business/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var business = await _context.Businesses
                 .Include(b => b.District)
                 .FirstOrDefaultAsync(m => m.BusinessID == id);
-            if (business == null)
-            {
-                return NotFound();
-            }
+            if (business == null) return NotFound();
 
             return View(business);
         }
 
         // POST: Business/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

@@ -15,39 +15,25 @@ namespace EKomplet.ServiceLayer.Logic
 
         public DistrictLogic(DistrictDBContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
 
         public async Task<List<DistrictDTO>> GetDistrictsAsync()
         {
-            List<DistrictDTO> _Districts = new List<DistrictDTO>();
-
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
-            foreach (District d in await Context.Districts.ToListAsync())
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-            {
-                _Districts.Add(new DistrictDTO(d));
-            }
 
 
-            return _Districts;
+            return (from d in await Context.Districts.ToListAsync() select new DistrictDTO(d)).ToList();
         }
 
         public async Task<DistrictDTO> GetDistrictAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            DistrictDTO _district = new DistrictDTO(await Context.Districts
+            if (id == null) return NotFound();
+            var district = new DistrictDTO(await Context.Districts
                 .FirstOrDefaultAsync(m => m.DistrictID == id));
 
-            if (_district == null)
-            {
-                return NotFound();
-            }
-            return _district;
+            return district ?? NotFound();
         }
 
         public async Task<bool> DeleteDistrictAsync(int districtID)
@@ -56,9 +42,10 @@ namespace EKomplet.ServiceLayer.Logic
             Context.Districts.Remove(district);
             await Context.SaveChangesAsync();
 
-            if(Context.Districts.Any(m => m.DistrictID != districtID))
-            { return true; }
-            else { return false; }
+            if (Context.Districts.Any(m => m.DistrictID != districtID))
+                return true;
+            else
+                return false;
         }
 
         public async Task<bool> CreateDistrictAsync(DistrictDTO district)
@@ -73,8 +60,6 @@ namespace EKomplet.ServiceLayer.Logic
             {
                 throw e;
             }
-
-
         }
 
         public async Task<bool> EditDistrictAsync(DistrictDTO district)
@@ -91,19 +76,20 @@ namespace EKomplet.ServiceLayer.Logic
             }
         }
 
-        private DistrictDTO NotFound()
+        private static DistrictDTO NotFound()
         {
             throw new NotImplementedException();
         }
-        private District DistrictDTOToDistrictModel(DistrictDTO districtDTO)
+
+        
+        private static District DistrictDTOToDistrictModel(DistrictDTO districtDTO)
         {
             return new District(districtDTO.DistrictName);
         }
 
-        private District DistrictDTOToDistrictModelWithID(DistrictDTO districtDTO)
+        private static District DistrictDTOToDistrictModelWithID(DistrictDTO districtDTO)
         {
             return new District(districtDTO.DistrictName, districtDTO.DistrictID);
         }
-
     }
 }

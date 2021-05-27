@@ -7,37 +7,37 @@
 <h3>Er du sikker på du vil slette sælgeren?</h3>
 <div>
 
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Telefonnummer
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             E-mail
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-2">
-           Fornavn
+        <dt class="col-sm-2">
+            Fornavn
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Efternavn
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="SalesmanID" />
-        <input type="submit" value="Slet sælger" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="SalesmanID"/>
+        <input type="submit" value="Slet sælger" class="btn btn-danger"/> |
         <a asp-action="Index">Tilbage</a>
     </form>
 </div>

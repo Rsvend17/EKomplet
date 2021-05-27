@@ -8,24 +8,25 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Telefonnummer
-            </th>
-            <th>
-                E-mail
-            </th>
-            <th>
-                Fornavn
-            </th>
-            <th>
-                Efternavn
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Telefonnummer
+        </th>
+        <th>
+            E-mail
+        </th>
+        <th>
+            Fornavn
+        </th>
+        <th>
+            Efternavn
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
@@ -45,7 +46,7 @@
                 <a asp-action="Delete" asp-route-id="@item.SalesmanID">Slet</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 

@@ -9,8 +9,10 @@ namespace EKomplet.ServiceLayer.ViewModel
     public class AddSalesmanToDistrictViewModel
     {
         public DistrictDTO district { get; set; }
-        public SalesmenStatusDTO  salesmenStatus {get; set;}
+        public SalesmenStatusDTO salesmenStatus { get; set; }
 
-        public AddSalesmanToDistrictViewModel() { }
+        public AddSalesmanToDistrictViewModel()
+        {
+        }
     }
 }

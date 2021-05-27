@@ -7,19 +7,19 @@
 <h3>Er du sikker på du vil slette distriktet?</h3>
 <div>
     <h4>Distrikt</h4>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Distrikt navn
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DistrictName)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="DistrictID" />
-        <input type="submit" value="Slet distrikt" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="DistrictID"/>
+        <input type="submit" value="Slet distrikt" class="btn btn-danger"/> |
         <a asp-action="Index">Tilbage</a>
     </form>
 </div>

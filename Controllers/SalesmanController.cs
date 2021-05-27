@@ -28,17 +28,11 @@ namespace EKomplet.Controllers
         // GET: Salesman/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var salesman = await _context.Salesmen
                 .FirstOrDefaultAsync(m => m.SalesmanID == id);
-            if (salesman == null)
-            {
-                return NotFound();
-            }
+            if (salesman == null) return NotFound();
 
             return View(salesman);
         }
@@ -54,7 +48,8 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SalesmanID,PhoneNumber,Email,FirstName,LastName")] Salesman salesman)
+        public async Task<IActionResult> Create([Bind("SalesmanID,PhoneNumber,Email,FirstName,LastName")]
+            Salesman salesman)
         {
             if (ModelState.IsValid)
             {
@@ -62,22 +57,17 @@ namespace EKomplet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(salesman);
         }
 
         // GET: Salesman/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var salesman = await _context.Salesmen.FindAsync(id);
-            if (salesman == null)
-            {
-                return NotFound();
-            }
+            if (salesman == null) return NotFound();
             return View(salesman);
         }
 
@@ -86,12 +76,10 @@ namespace EKomplet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SalesmanID,PhoneNumber,Email,FirstName,LastName")] Salesman salesman)
+        public async Task<IActionResult> Edit(int id, [Bind("SalesmanID,PhoneNumber,Email,FirstName,LastName")]
+            Salesman salesman)
         {
-            if (id != salesman.SalesmanID)
-            {
-                return NotFound();
-            }
+            if (id != salesman.SalesmanID) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -103,39 +91,32 @@ namespace EKomplet.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!SalesmanExists(salesman.SalesmanID))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(salesman);
         }
 
         // GET: Salesman/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var salesman = await _context.Salesmen
                 .FirstOrDefaultAsync(m => m.SalesmanID == id);
-            if (salesman == null)
-            {
-                return NotFound();
-            }
+            if (salesman == null) return NotFound();
 
             return View(salesman);
         }
 
         // POST: Salesman/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

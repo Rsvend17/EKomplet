@@ -9,24 +9,25 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Navn
-            </th>
-            <th>
-               Adresse
-            </th>
-            <th>
-                Postnummer
-            </th>
-            <th>
-                Distrikt
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Navn
+        </th>
+        <th>
+            Adresse
+        </th>
+        <th>
+            Postnummer
+        </th>
+        <th>
+            Distrikt
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.BusinessName)
@@ -46,7 +47,7 @@
                 <a asp-action="Delete" asp-route-id="@item.BusinessID">Slet</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 

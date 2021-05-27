@@ -16,9 +16,7 @@ namespace EKomplet.ServiceLayer.ViewModel
 
         public DistrictCreateViewModel(IEnumerable<SalesmanDTO> salesmen)
         {
-            this.Salesmen = salesmen;
+            Salesmen = salesmen;
         }
-
-
     }
 }

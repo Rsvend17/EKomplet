@@ -11,28 +11,22 @@ namespace EKomplet.ServiceLayer.Logic
 {
     public class SalesmenStatusLogic
     {
-
         public DistrictDBContext Context { get; set; }
 
         public SalesmenStatusLogic(DistrictDBContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
 
         public async Task<List<SalesmenStatusDTO>> GetSalesmenStatusesAsync(int? districtID)
         {
-            if (districtID == null)
-            {
-                throw new Exception("ID not found");
-            }
+            if (districtID == null) throw new Exception("ID not found");
 
-            List<SalesmenStatusDTO> salesmenStatuses = new List<SalesmenStatusDTO>();
+            var salesmenStatuses = new List<SalesmenStatusDTO>();
 
-            foreach (SalesmenStatus s in await Context.SalesmenStatuses.Where(s => s.DistrictID == districtID).ToListAsync())
-            {
+            foreach (var s in await Context.SalesmenStatuses.Where(s => s.DistrictID == districtID).ToListAsync())
                 salesmenStatuses.Add(new SalesmenStatusDTO(s));
-            }
 
 
             return salesmenStatuses;
@@ -40,17 +34,12 @@ namespace EKomplet.ServiceLayer.Logic
 
         public async Task<List<SalesmenStatusDTO>> GetSalesmenStatusesInDistrictAsync(int? districtID)
         {
-            if (districtID == null)
-            {
-                throw new Exception("ID not found");
-            }
+            if (districtID == null) throw new Exception("ID not found");
 
-            List<SalesmenStatusDTO> _salesmenStatuses = new List<SalesmenStatusDTO>();
+            var _salesmenStatuses = new List<SalesmenStatusDTO>();
 
-            foreach (SalesmenStatus s in await Context.SalesmenStatuses.Where(s => s.DistrictID == districtID).ToListAsync())
-            {
+            foreach (var s in await Context.SalesmenStatuses.Where(s => s.DistrictID == districtID).ToListAsync())
                 _salesmenStatuses.Add(new SalesmenStatusDTO(s));
-            }
 
             return _salesmenStatuses;
         }
@@ -61,7 +50,8 @@ namespace EKomplet.ServiceLayer.Logic
             var _District = await Context.Districts.Where(m => m.DistrictName == districtName).FirstOrDefaultAsync();
             try
             {
-                await Context.SalesmenStatuses.AddAsync(ConvertSalesmenStatusDTOPrimaryToModel(salesmenStatus, _District.DistrictID));
+                await Context.SalesmenStatuses.AddAsync(
+                    ConvertSalesmenStatusDTOPrimaryToModel(salesmenStatus, _District.DistrictID));
                 await Context.SaveChangesAsync();
                 return true;
             }
@@ -73,10 +63,10 @@ namespace EKomplet.ServiceLayer.Logic
 
         public async Task<bool> CreateSalesmanStatusPrimaryAsync(SalesmenStatusDTO salesmenStatus, int districtID)
         {
-
             try
             {
-                await Context.SalesmenStatuses.AddAsync(ConvertSalesmenStatusDTOPrimaryToModel(salesmenStatus, districtID));
+                await Context.SalesmenStatuses.AddAsync(
+                    ConvertSalesmenStatusDTOPrimaryToModel(salesmenStatus, districtID));
                 await Context.SaveChangesAsync();
                 return true;
             }
@@ -88,10 +78,10 @@ namespace EKomplet.ServiceLayer.Logic
 
         public async Task<bool> CreateSalesmanStatusSecondaryAsync(SalesmenStatusDTO salesmenStatus, int districtID)
         {
-
             try
             {
-                await Context.SalesmenStatuses.AddAsync(ConvertSalesmenStatusDTOSecondaryToModel(salesmenStatus, districtID));
+                await Context.SalesmenStatuses.AddAsync(
+                    ConvertSalesmenStatusDTOSecondaryToModel(salesmenStatus, districtID));
                 await Context.SaveChangesAsync();
                 return true;
             }
@@ -103,11 +93,21 @@ namespace EKomplet.ServiceLayer.Logic
 
         public async Task<bool> DeleteSalesmanFromDistrictAsync(int districtID, int salesmanID)
         {
-            var salesmanCheck = await Context.SalesmenStatuses.Where(m => m.Status == Status.Primary).Where(m => m.DistrictID == districtID).ToListAsync();
 
-            if(salesmanCheck.Count > 1)
+            var salesman =
+                Context.SalesmenStatuses.FirstOrDefault(status => status.SalesmanID == salesmanID && status.DistrictID == districtID);
+
+            if (salesman == null)
             {
-                var SalesmanStatus = await Context.SalesmenStatuses.Where(m => m.DistrictID == districtID).Where(m => m.SalesmanID == salesmanID).FirstAsync();
+                return false;
+            }
+            var numberOfPrimarySalesmenInDistrict = await Context.SalesmenStatuses.Where(m => m.Status == Status.Primary)
+                .Where(m => m.DistrictID == districtID).ToListAsync();
+            
+            if (numberOfPrimarySalesmenInDistrict.Count > 1 || salesman.Status != Status.Primary)
+            {
+                var SalesmanStatus = await Context.SalesmenStatuses.Where(m => m.DistrictID == districtID)
+                    .Where(m => m.SalesmanID == salesmanID).FirstAsync();
                 Context.SalesmenStatuses.Remove(SalesmanStatus);
                 await Context.SaveChangesAsync();
                 return true;
@@ -116,7 +116,6 @@ namespace EKomplet.ServiceLayer.Logic
             {
                 return false;
             }
-
         }
 
         private SalesmenStatus ConvertSalesmenStatusDTOPrimaryToModel(SalesmenStatusDTO salesmenStatus, int districtID)
@@ -124,7 +123,8 @@ namespace EKomplet.ServiceLayer.Logic
             return new SalesmenStatus(salesmenStatus.SalesmanID, districtID, Status.Primary);
         }
 
-        private SalesmenStatus ConvertSalesmenStatusDTOSecondaryToModel(SalesmenStatusDTO salesmenStatus, int districtID)
+        private SalesmenStatus ConvertSalesmenStatusDTOSecondaryToModel(SalesmenStatusDTO salesmenStatus,
+            int districtID)
         {
             return new SalesmenStatus(salesmenStatus.SalesmanID, districtID, Status.Secondary);
         }

@@ -6,32 +6,32 @@
 
 <h1>Tilføj butik</h1>
 
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BusinessName" class="control-label">Navn</label>
-                <input asp-for="BusinessName" class="form-control" />
+                <input asp-for="BusinessName" class="form-control"/>
                 <span asp-validation-for="BusinessName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DistrictID" class="control-label"> Distrikt</label>
-                <select asp-for="DistrictID" class ="form-control" asp-items="ViewBag.DistrictID"></select>
+                <select asp-for="DistrictID" class="form-control" asp-items="ViewBag.DistrictID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Adress" class="control-label">Adresse</label>
-                <input asp-for="Adress" class="form-control" />
+                <input asp-for="Adress" class="form-control"/>
                 <span asp-validation-for="Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ZipCode" class="control-label">Postnummer</label>
-                <input asp-for="ZipCode" class="form-control" />
+                <input asp-for="ZipCode" class="form-control"/>
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Tilføj" class="btn btn-primary" />
+                <input type="submit" value="Tilføj" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -42,5 +42,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

@@ -11,29 +11,22 @@ namespace EKomplet.ServiceLayer.Logic
 {
     public class BusinessLogic
     {
-
         public DistrictDBContext Context { get; set; }
 
-        public BusinessLogic (DistrictDBContext context)
+        public BusinessLogic(DistrictDBContext context)
         {
-            this.Context = context;
+            Context = context;
         }
-
 
 
         public async Task<List<BusinessDTO>> GetBusinessesInDistrictAsync(int? districtID)
         {
-            if(districtID == null)
-            {
-                throw new Exception("District ID was not found");
-            }
+            if (districtID == null) throw new Exception("District ID was not found");
 
-            List<BusinessDTO> businesses = new List<BusinessDTO>();
+            var businesses = new List<BusinessDTO>();
 
-            foreach (Business b in await Context.Businesses.Where(m => m.DistrictID == districtID).ToListAsync())
-            {
+            foreach (var b in await Context.Businesses.Where(m => m.DistrictID == districtID).ToListAsync())
                 businesses.Add(new BusinessDTO(b));
-            }
 
 
             return businesses;

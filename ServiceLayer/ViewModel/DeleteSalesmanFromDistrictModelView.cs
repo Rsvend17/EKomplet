@@ -8,13 +8,12 @@ namespace EKomplet.ServiceLayer.ViewModel
 {
     public class DeleteSalesmanFromDistrictModelView
     {
-
         public SalesmanDTO salesmanDTO { get; set; }
         public DistrictDTO district { get; set; }
 
         public DeleteSalesmanFromDistrictModelView(SalesmanDTO salesman, DistrictDTO district)
         {
-            this.salesmanDTO = salesman;
+            salesmanDTO = salesman;
             this.district = district;
         }
     }

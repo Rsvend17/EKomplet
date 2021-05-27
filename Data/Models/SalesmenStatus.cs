@@ -13,7 +13,7 @@ namespace EKomplet.Models
     }
 
     public class SalesmenStatus
-    { 
+    {
         public int SalesmanID { get; set; }
         public int DistrictID { get; set; }
 
@@ -22,13 +22,15 @@ namespace EKomplet.Models
         public Salesman Salesman { get; set; }
         public District District { get; set; }
 
-        public SalesmenStatus() { }
+        public SalesmenStatus()
+        {
+        }
 
         public SalesmenStatus(int salesmanID, int districtID, Status salesmanStatus)
         {
-            this.SalesmanID = salesmanID;
-            this.DistrictID = districtID;
-            this.Status = salesmanStatus;
+            SalesmanID = salesmanID;
+            DistrictID = districtID;
+            Status = salesmanStatus;
         }
     }
 }

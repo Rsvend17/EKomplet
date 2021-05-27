@@ -8,15 +8,16 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Distrikter
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Distrikter
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DistrictName)
@@ -27,7 +28,7 @@
                 <a asp-action="Delete" asp-route-id="@item.DistrictID">Slet</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 

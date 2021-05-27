@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PQls+gO6Xm7JvdmP04v1MKF+XcPenKCPUcK7AG82Upo86I3dsvL8AcVHCv0R5jDoetBFbVtj7Nd34GXWW7Ojeg==",
+  "dgSpecHash": "/gmYKbeaQnp8pbkyyfQnbBCkcht0KrRMSziDs5kgiGqg2/6sfvelPH/0MYQF8OT1G0yP3zL/8R/dDVfdovKurg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ronnie\\source\\repos\\EKomplet\\EKomplet.csproj",
   "expectedPackageFiles": [
@@ -172,7 +172,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Ronnie\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": []
 }
