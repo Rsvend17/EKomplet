@@ -18,5 +18,10 @@ namespace EKomplet.ServiceLayer.ViewModel
         {
             Salesmen = salesmen;
         }
+
+        public DistrictCreateViewModel()
+        {
+            
+        }
     }
 }

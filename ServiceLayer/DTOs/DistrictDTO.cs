@@ -26,5 +26,11 @@ namespace EKomplet.ServiceLayer.DTOs
             DistrictID = district.DistrictID;
             DistrictName = district.DistrictName;
         }
+
+        public static District DistrictDTOToModel(DistrictDTO district)
+        {
+            var toDistrict = new District(district.DistrictName, district.DistrictID);
+            return toDistrict;
+        }
     }
 }

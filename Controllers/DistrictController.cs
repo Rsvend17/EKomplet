@@ -64,14 +64,14 @@ namespace EKomplet.Controllers
         public async Task<IActionResult> Create([Bind("DistrictID,DistrictName")] DistrictDTO district,
             [Bind("DistrictID, SalesmanID")] SalesmenStatusDTO salesmenStatus)
         {
-            if (ModelState.IsValid)
-            {
-                await _districtLogic.CreateDistrictAsync(district);
-                await _salesmenStatusLogic.CreateSalesmanStatusPrimaryAsync(salesmenStatus, district.DistrictName);
-                return RedirectToAction(nameof(Index));
-            }
+            
+            if (!ModelState.IsValid) return View();
+            
+            
+            await _districtLogic.CreateDistrictAsync(district);
+            await _salesmenStatusLogic.CreateSalesmanStatusPrimaryAsync(salesmenStatus, district.DistrictName);
+            return RedirectToAction(nameof(Index));
 
-            return View(district);
         }
 
         // GET: District/Edit/5

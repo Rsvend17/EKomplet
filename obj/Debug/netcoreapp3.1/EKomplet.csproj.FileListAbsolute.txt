@@ -1,5 +1,3 @@
-C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\EKomplet.exe
 C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\EKomplet.deps.json
 C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\EKomplet.runtimeconfig.json
@@ -373,3 +371,5 @@ C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\EKomplet.pdb
 C:\Users\Ronni\Documents\GitHub\EKomplet\obj\Debug\netcoreapp3.1\EKomplet.genruntimeconfig.cache
 C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\Razor\Views\District\DeleteSalesmanFailed.cshtml.g.cs
 C:\Users\Ronnie\source\repos\EKomplet\obj\Debug\netcoreapp3.1\scopedcss\bundle\EKomplet.styles.css
+C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Ronnie\source\repos\EKomplet\bin\Debug\netcoreapp3.1\appsettings.json
